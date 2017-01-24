@@ -1,0 +1,19 @@
+.nav-list {
+    list-style: none;
+    margin-left: 3vw;
+}
+.fields-header {
+    background: #5598ab;
+    color: white;
+    text-transform: uppercase;
+}
+.panel-block .control:hover {
+    background-color: whitesmoke;
+}
+
+.control {
+    text-transform: capitalize;
+}
+.plus {
+    color: grey;
+}
