@@ -1,48 +1,48 @@
-import React, {Component} from "react";
-const renderSubItems = properties => {
-  return properties.map((item, index) => <span>{item.name}</span>);
-};
+import React, { Component } from "react";
+
 class SidePanelItem extends Component {
-    constructor(props) {
-        super(props);
-        this.state = {
-            areSubItemsVisible: false,
-        }
-        this.renderSubItems = this.renderSubItems.bind(this);
+  state = { areSubItemsVisible: false };
+  renderSubItems = obj => {
+    if (!obj) return;
+    else {
+      this.props.handleItemClick(obj);
+      this.setState({ areSubItemsVisible: !this.state.areSubItemsVisible });
     }
-    renderSubItems(obj) {
-        if(!obj) return;
-        else {
-            this.setState({
-                areSubItemsVisible: !this.state.areSubItemsVisible,
-            })
-        }
-    }
+  };
   render() {
     const containingObj = this.props.containingObj || undefined;
-    const {areSubItemsVisible} = this.state;
+    const { areSubItemsVisible, name } = this.props.item;
+    const { activeItem } = this.state;
     return (
       <div className="panel-block aside-panels">
-       {containingObj && containingObj.properties.length ? 
-        <a className="control" onClick={() => this.renderSubItems(containingObj)}>
-            <span className="plus">+  </span>
-          {this.props.name}
-        </a> : 
-        <a className="control" onClick={() => this.props.handleItemClick(this.props.item)} >
-         {this.props.name}
-        </a>
+        {
+          containingObj && containingObj.properties.length
+            ? <a
+              className="control"
+              onClick={() => this.renderSubItems(containingObj)}
+            >
+              <span className="plus">{areSubItemsVisible ? "-" : "+"}</span>
+              {name}
+            </a>
+            : <a
+              className="control"
+              onClick={() => this.props.handleItemClick(this.props.item)}
+            >
+              {this.props.name}
+            </a>
         }
-        
-        {areSubItemsVisible ? 
-            <div className="flex-column">
-                {containingObj.properties.map(prop => 
-                    <a className="control" 
-                       onClick={() => this.props.handleItemClick(prop)}>
-                        {prop.name}
-                    </a>
-                )}
-            </div>
-            : undefined
+        {
+          containingObj && areSubItemsVisible ? <div className="flex-column">
+              {containingObj.properties.map((prop, uid) => (
+                <a
+                  className="control"
+                  key={uid}
+                  onClick={() => this.props.addRef(prop)}
+                >
+                  {prop.name}
+                </a>
+              ))}
+            </div> : undefined
         }
       </div>
     );

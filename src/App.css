@@ -2,6 +2,9 @@
     display: flex;
     flex-direction: column;
 }
+.inline-flex {
+  display: inline-flex;
+}
 
 .align-baseline {
  align-items: baseline; 
@@ -10,4 +13,16 @@
   display: flex;
   flex-direction: column;
   align-items: baseline; 
+}
+.title-case {
+  text-transform: capitalize;
+}
+.label {
+  margin-right: 1vw;
+}
+.loading {
+      text-align: center;
+    width: 100%;
+    margin-top: 10%;
+    font-size: 2em;
 }

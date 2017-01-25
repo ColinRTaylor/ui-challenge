@@ -14,12 +14,13 @@ class SidePanel extends Component {
                     </p>
                   
                 {names.map((datum, index) => {
-                    console.log(datum.containing_object);
+                    // console.log(datum.containing_object);
                     const containingObj = datum.containing_object || undefined;
                     return (
                         <SidePanelItem 
                         containingObj={containingObj}
                         handleItemClick={this.props.handleItemClick}
+                        addRef={this.props.addRef}
                         key={index}
                         name={datum.name}
                         item={datum}
