@@ -12,7 +12,6 @@ class SidePanelItem extends Component {
   render() {
     const containingObj = this.props.containingObj || undefined;
     const { areSubItemsVisible, name } = this.props.item;
-    const { activeItem } = this.state;
     return (
       <div className="panel-block aside-panels">
         {
@@ -28,7 +27,7 @@ class SidePanelItem extends Component {
               className="control"
               onClick={() => this.props.handleItemClick(this.props.item)}
             >
-              {this.props.name}
+              {name}
             </a>
         }
         {

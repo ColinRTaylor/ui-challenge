@@ -42,21 +42,21 @@ class App extends Component {
       <div>
         <nav className="nav">
           <div className="nav-left">
-            App
+            Evertrue App
           </div>
         </nav>
         <div className="columns">
-            {
-              loading ?
-               <span className="loading">Loading...</span> : 
-          <div className="column is-one-quarter">
-                 <SidePanel
+          {
+            loading
+              ? <span className="loading">Loading...</span>
+              : <div className="column is-one-quarter">
+                <SidePanel
                   addRef={this.addRef}
                   data={data}
                   handleItemClick={this.handleItemClick}
                 />
-          </div>
-            }
+              </div>
+          }
           <main className="column">
             {itemForMain ? <MainDisplay item={itemForMain} /> : undefined}
           </main>
