@@ -12,7 +12,8 @@
 .panel-block.aside-panels {
   display: flex;
   flex-direction: column;
-  align-items: baseline; 
+  align-items: baseline;
+  padding: 10% 2%;
 }
 .title-case {
   text-transform: capitalize;

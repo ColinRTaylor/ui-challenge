@@ -3,20 +3,20 @@ import "./SidePanel.css";
 import SidePanelItem from "./SidePanelItem";
 
 const SidePanel = props => {
-  const names = props.data.filter(datum => datum.name);
+  const {data} = props;
+  // TODO: move this 
+  // const names = data.filter(datum => datum.name);
   return (
     <aside>
       <nav className="panel">
         <p className="panel-heading fields-header">
           Field Groups
         </p>
-        {names.map((datum, index) => {
-          const containingObj = datum.containing_object || undefined;
+        {data.map((datum, index) => {
           return (
             <SidePanelItem
-              containingObj={containingObj}
               handleItemClick={props.handleItemClick}
-              addRef={props.addRef}
+              setActiveItem={props.setActiveItem}
               key={index}
               item={datum}
             />

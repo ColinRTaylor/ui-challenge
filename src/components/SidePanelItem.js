@@ -1,48 +1,39 @@
 import React, { Component } from "react";
-
+import { removeUnderscores } from "../utils";
 class SidePanelItem extends Component {
   state = { areSubItemsVisible: false };
   renderSubItems = obj => {
-    if (!obj) return;
-    else {
+
       this.props.handleItemClick(obj);
-      this.setState({ areSubItemsVisible: !this.state.areSubItemsVisible });
-    }
+      //this.setState({ areSubItemsVisible: !this.state.areSubItemsVisible });
+    
+  };
+  renderProperties = properties => {
+    return (
+      <div className="flex-column">
+        {properties.map((prop, uid) => (
+          <a
+            className={"control side-panel-item " + (prop.isActive ? 'active': undefined)}
+            key={uid}
+            onClick={() => this.props.setActiveItem(prop)}
+          >
+            {removeUnderscores(prop.name)}
+          </a>
+        ))}
+      </div>
+    );
   };
   render() {
-    const containingObj = this.props.containingObj || undefined;
-    const { areSubItemsVisible, name } = this.props.item;
+    const { item:{name, containing_object: { properties }, areSubItemsVisible}, item } = this.props;
+    // const { areSubItemsVisible } = this.state;
     return (
       <div className="panel-block aside-panels">
-        {
-          containingObj && containingObj.properties.length
-            ? <a
-              className="control"
-              onClick={() => this.renderSubItems(containingObj)}
-            >
+        <a className={"group-header " + (areSubItemsVisible ? "active": undefined)} 
+        onClick={() => this.renderSubItems(item)}>
               <span className="plus">{areSubItemsVisible ? "-" : "+"}</span>
-              {name}
-            </a>
-            : <a
-              className="control"
-              onClick={() => this.props.handleItemClick(this.props.item)}
-            >
-              {name}
-            </a>
-        }
-        {
-          containingObj && areSubItemsVisible ? <div className="flex-column">
-              {containingObj.properties.map((prop, uid) => (
-                <a
-                  className="control"
-                  key={uid}
-                  onClick={() => this.props.addRef(prop)}
-                >
-                  {prop.name}
-                </a>
-              ))}
-            </div> : undefined
-        }
+              {removeUnderscores(name)}
+            </a> 
+        {areSubItemsVisible ? this.renderProperties(properties) : undefined}
       </div>
     );
   }

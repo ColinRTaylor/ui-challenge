@@ -1,4 +1,5 @@
 import React, { Component } from "react";
+import { removeUnderscores } from "../utils";
 
 class DisplaySubItem extends Component {
   componentDidUpdate() {
@@ -7,24 +8,24 @@ class DisplaySubItem extends Component {
       this.refs.isActive.scrollIntoView({ behavior: "smooth" });
   }
   render() {
-    const { item } = this.props;
+    const { item: {name, data_type, isActive, app_keys} } = this.props;
     return (
       <div className="panel-block flex-column aside-panels">
         <div className="inline-flex">
           {
-            item.isActive ? <span className="label" ref="isActive">
+            isActive ? <span className="label" ref="isActive">
                 Ever True Field Name:
               </span> : <span className="label">Ever True Field Name: </span>
           }
-          <p> {item.name}</p>
+          <p> {removeUnderscores(name)}</p>
         </div>
         <div className="inline-flex">
-          <span className="label">Type: </span> <p> {item.data_type}</p>
+          <span className="label">Type: </span> <p> {data_type}</p>
         </div>
         <div className="inline-flex">
           <span className="label">Usage: </span>
           <div>
-            {item.app_keys.map((key, uid) => <p key={uid}> {key}</p>)}
+            {app_keys.map((key, uid) => <p key={uid}> {key}</p>)}
           </div>
         </div>
       </div>

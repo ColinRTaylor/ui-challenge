@@ -8,11 +8,23 @@ class App extends Component {
   componentDidMount() {
     fetch(`/data/schema.json`)
       .then(res => res.json())
-      .then(data => this.setState({ data, loading: false }));
+      .then(json => this.editData(json))
+      .then(data => this.setState({ data, loading: false, itemForMain: data[0] }));
+  }
+  editData(data) {
+    const groups = data.filter(group => group.containing_object)
+    const generalInfo =  {
+      containing_object: {
+        properties: data.filter(i => !i.containing_object),
+      },
+      name: "General Info",
+      areSubItemsVisible: true,
+    };
+    return [generalInfo, ...groups];
   }
   handleItemClick = item => {
     const newData = this.state.data.map(obj => {
-      if (obj.containing_object && obj.containing_object.id === item.id) {
+      if(obj.containing_object.name === item.containing_object.name) {
         obj.areSubItemsVisible = !obj.areSubItemsVisible;
       } else {
         // close all others so only 1 is open at a time
@@ -20,8 +32,20 @@ class App extends Component {
       }
       return obj;
     });
-    this.setState({ itemForMain: item, data: newData });
+    // itemForMain: item,
+    this.setState({  data: newData, itemForMain: item });
   };
+  setActiveItem = item => {
+    const newData = this.state.data.map(obj => {
+      obj.containing_object.properties.forEach(i => {
+        if(i.id === item.id)  i.isActive = true;
+        else i.isActive = false
+        
+      })
+      return obj;
+    })
+    this.setState({  data: newData });
+  }
   addRef = item => {
     let { properties } = this.state.itemForMain;
     // copy the obj
@@ -51,7 +75,7 @@ class App extends Component {
               ? <span className="loading">Loading...</span>
               : <div className="column is-one-quarter">
                 <SidePanel
-                  addRef={this.addRef}
+                  setActiveItem={this.setActiveItem}
                   data={data}
                   handleItemClick={this.handleItemClick}
                 />

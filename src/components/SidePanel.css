@@ -17,3 +17,26 @@
 .plus {
     color: grey;
 }
+.side-panel-item {
+    border-left: 3px solid #858383;
+    color: #858383;
+    padding-left: 1vw;
+}
+.side-panel-item.active {
+    border-left: 3px solid rebeccapurple;
+    color: rebeccapurple;
+}
+
+.group-header {
+    font-size: 1.3em;
+    color: #1fafd1;
+    font-weight: bold;
+    margin-bottom: 3%;
+    text-transform: capitalize;
+}
+.group-header:hover {
+    cursor: pointer;
+}
+.group-header.active {
+    color: #414040;
+}
