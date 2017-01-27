@@ -8,23 +8,53 @@ class App extends Component {
   componentDidMount() {
     fetch(`/data/schema.json`)
       .then(res => res.json())
-      .then(json => this.editData(json))
-      .then(data => this.setState({ data, loading: false, itemForMain: data[0] }));
+      .then(json => this.initData(json))
+      .then(
+        data => this.setState({ data, loading: false, itemForMain: data[0] })
+      ).catch(err => alert(err));
   }
-  editData(data) {
-    const groups = data.filter(group => group.containing_object)
-    const generalInfo =  {
-      containing_object: {
-        properties: data.filter(i => !i.containing_object),
+  initData(data) {
+    const initialValue = [
+      { name: "General Info", areSubItemsVisible: true, properties: [] }
+    ];
+    const groups = data.reduce(
+      (accum, group,) => {
+        if (group.hasOwnProperty("containing_object")) {
+          // create ref to clean up data
+          group.properties = group.containing_object.properties;
+          return accum.concat(group);
+        } else {
+          //accum[0].properties.concat(group)
+          accum[0].properties.push(group);
+          return accum;
+        }
       },
-      name: "General Info",
-      areSubItemsVisible: true,
-    };
-    return [generalInfo, ...groups];
+      initialValue
+    );
+    //  [
+    //   {name: "General Info",
+    //   areSubItemsVisible: true, properties:[]}
+    // ]
+    // console.log(groups)
+    return groups;
+    // const groups = data.filter(group => {
+    //   if(group.hasOwnProperty('containing_object')) {
+    //     group.properties = group.containing_object.properties;
+    //     return group
+    //   }
+    // });
+    // const generalInfo = {
+    //   containing_object: { properties: data.filter(i => !i.containing_object) },
+    //   properties: data.filter(i => !i.containing_object),
+    //   name: "General Info",
+    //   areSubItemsVisible: true
+    // };
+    // return [ generalInfo, ...groups ];
   }
   handleItemClick = item => {
+    // doing at data level so can only have 1 open at a time
     const newData = this.state.data.map(obj => {
-      if(obj.containing_object.name === item.containing_object.name) {
+      if (obj.name === item.name) {
         obj.areSubItemsVisible = !obj.areSubItemsVisible;
       } else {
         // close all others so only 1 is open at a time
@@ -33,33 +63,23 @@ class App extends Component {
       return obj;
     });
     // itemForMain: item,
-    this.setState({  data: newData, itemForMain: item });
+    this.setState({ data: newData, itemForMain: item });
   };
   setActiveItem = item => {
-    const newData = this.state.data.map(obj => {
-      obj.containing_object.properties.forEach(i => {
-        if(i.id === item.id)  i.isActive = true;
-        else i.isActive = false
-        
-      })
+    //const { containing_object } = this.state.itemForMain;
+    const newProps = this.state.itemForMain.properties.map(obj => {
+      if (obj.id === item.id) obj.isActive = true;
+      else obj.isActive = false;
       return obj;
-    })
-    this.setState({  data: newData });
-  }
-  addRef = item => {
-    let { properties } = this.state.itemForMain;
-    // copy the obj
-    let obj = Object.assign({}, this.state.itemForMain);
-
-    obj.properties = properties.map(prop => {
-      // add active for the ref
-      if (prop.id === item.id) {
-        prop.isActive = true;
-      }
-      return prop;
     });
-    this.setState({ itemForMain: obj });
+    this.setState({
+      itemForMain: Object.assign(
+        { properties: newProps },
+        this.state.itemForMain
+      )
+    });
   };
+
   render() {
     const { data, itemForMain, loading } = this.state;
     return (

@@ -2,6 +2,12 @@
     display: flex;
     flex-direction: column;
 }
+.flex-row {
+  display: flex;
+}
+.just-between {
+  justify-content: space-between;
+}
 .inline-flex {
   display: inline-flex;
 }

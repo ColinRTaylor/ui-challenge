@@ -24,12 +24,11 @@ class SidePanelItem extends Component {
     );
   };
   render() {
-    const { item:{name, containing_object: { properties }, areSubItemsVisible}, item } = this.props;
-    // const { areSubItemsVisible } = this.state;
+    const { item:{name,  properties , areSubItemsVisible}, item } = this.props;
     return (
       <div className="panel-block aside-panels">
         <a className={"group-header " + (areSubItemsVisible ? "active": undefined)} 
-        onClick={() => this.renderSubItems(item)}>
+        onClick={() => this.props.handleItemClick(item)}>
               <span className="plus">{areSubItemsVisible ? "-" : "+"}</span>
               {removeUnderscores(name)}
             </a> 
