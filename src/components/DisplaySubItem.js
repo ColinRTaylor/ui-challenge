@@ -6,16 +6,16 @@ class DisplaySubItem extends Component {
   state = {
     active: undefined,
   };
-  hasActivated = false;
-  shouldComponentUpdate () {
-    if(this.hasActivated) return false
-    else return true;
-  }
+  // hasActivated = false;
+  // shouldComponentUpdate () {
+  //   if(this.hasActivated) return false
+  //   else return true;
+  // }
   componentDidUpdate() {
     // navigate (scroll) to this item in list
     if(this.refs.isActive) {
       this.refs.isActive.scrollIntoView({ behavior: "smooth", block: "end" });
-      this.hasActivated = true;
+      //this.hasActivated = true;
       // this.setState({active: "active"})
     } 
   }

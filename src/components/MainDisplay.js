@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-//import DisplayItem from "./DisplayItem";
+
 import DisplaySubItem from "./DisplaySubItem";
 class MainDisplay extends Component {
   render() {

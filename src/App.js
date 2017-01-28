@@ -11,7 +11,7 @@ class App extends Component {
       .then(json => this.initData(json))
       .then(
         data => this.setState({ data, loading: false, itemForMain: data[0] })
-      ).catch(err => alert(err));
+      ).catch(err => alert("There was an error with the application"));
   }
   initData(data) {
     const initialValue = [
@@ -24,18 +24,12 @@ class App extends Component {
           group.properties = group.containing_object.properties;
           return accum.concat(group);
         } else {
-          //accum[0].properties.concat(group)
-          accum[0].properties.push(group);
+          accum[0].properties = accum[0].properties.concat(group);
           return accum;
         }
       },
       initialValue
     );
-    //  [
-    //   {name: "General Info",
-    //   areSubItemsVisible: true, properties:[]}
-    // ]
-    // console.log(groups)
     return groups;
     // const groups = data.filter(group => {
     //   if(group.hasOwnProperty('containing_object')) {
@@ -66,8 +60,9 @@ class App extends Component {
     this.setState({ data: newData, itemForMain: item });
   };
   setActiveItem = item => {
-    //const { containing_object } = this.state.itemForMain;
-    const newProps = this.state.itemForMain.properties.map(obj => {
+    const { properties } = this.state.itemForMain;
+    console.log(this.refs)
+    const newProps = properties.map(obj => {
       if (obj.id === item.id) obj.isActive = true;
       else obj.isActive = false;
       return obj;
