@@ -6,7 +6,7 @@ class MainDisplay extends Component {
     const { item: {name,  properties } } = this.props;
     return (
       <div className="panel">
-          <h4 className="panel-heading is-4 title-case">{name}</h4>
+          <h4 className="panel-heading title is-3 title-case">{name}</h4>
         {
           properties
             ? properties.map((prop, uid) => (
