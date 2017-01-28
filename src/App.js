@@ -11,7 +11,7 @@ class App extends Component {
       .then(json => this.initData(json))
       .then(
         data => this.setState({ data, loading: false, itemForMain: data[0] })
-      ).catch(err => alert("There was an error with the application"));
+      ).catch(err => console.error(err));
   }
   initData(data) {
     const initialValue = [
@@ -20,7 +20,7 @@ class App extends Component {
     const groups = data.reduce(
       (accum, group,) => {
         if (group.hasOwnProperty("containing_object")) {
-          // create ref to clean up data
+          // create reference to normalize up data
           group.properties = group.containing_object.properties;
           return accum.concat(group);
         } else {
@@ -47,21 +47,23 @@ class App extends Component {
   }
   handleItemClick = item => {
     // doing at data level so can only have 1 open at a time
-    const newData = this.state.data.map(obj => {
-      if (obj.name === item.name) {
-        obj.areSubItemsVisible = !obj.areSubItemsVisible;
+    const newData = this.state.data.map(datum => {
+      // prevent unwanted scrolling
+      datum.properties.forEach(prop => {
+        prop.isActive = false;
+      })
+      if (datum.name === item.name) {
+        datum.areSubItemsVisible = !datum.areSubItemsVisible;
       } else {
         // close all others so only 1 is open at a time
-        obj.areSubItemsVisible = false;
+        datum.areSubItemsVisible = false;
       }
-      return obj;
+      return datum;
     });
-    // itemForMain: item,
     this.setState({ data: newData, itemForMain: item });
   };
   setActiveItem = item => {
-    const { properties } = this.state.itemForMain;
-    console.log(this.refs)
+    const {properties } = this.state.itemForMain;
     const newProps = properties.map(obj => {
       if (obj.id === item.id) obj.isActive = true;
       else obj.isActive = false;
@@ -71,7 +73,7 @@ class App extends Component {
       itemForMain: Object.assign(
         { properties: newProps },
         this.state.itemForMain
-      )
+      ),
     });
   };
 

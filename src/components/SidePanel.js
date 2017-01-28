@@ -4,8 +4,6 @@ import SidePanelItem from "./SidePanelItem";
 
 const SidePanel = props => {
   const {data} = props;
-  // TODO: move this 
-  // const names = data.filter(datum => datum.name);
   return (
     <aside>
       <nav className="panel">

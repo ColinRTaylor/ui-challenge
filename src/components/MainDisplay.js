@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 
-import DisplaySubItem from "./DisplaySubItem";
+import MainDisplayItem from "./MainDisplayItem";
 class MainDisplay extends Component {
   render() {
     const { item: {name,  properties } } = this.props;
@@ -10,7 +10,7 @@ class MainDisplay extends Component {
         {
           properties
             ? properties.map((prop, uid) => (
-              <DisplaySubItem key={uid} item={prop} />
+              <MainDisplayItem key={uid} item={prop} />
             ))
             : undefined
         }
