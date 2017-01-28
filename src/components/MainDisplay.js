@@ -1,21 +1,12 @@
-import React, { Component } from "react";
-
+import React from "react";
 import MainDisplayItem from "./MainDisplayItem";
-class MainDisplay extends Component {
-  render() {
-    const { item: {name,  properties } } = this.props;
-    return (
-      <div className="panel">
-          <h4 className="panel-heading title is-3 title-case">{name}</h4>
-        {
-          properties
-            ? properties.map((prop, uid) => (
-              <MainDisplayItem key={uid} item={prop} />
-            ))
-            : undefined
-        }
-      </div>
-    );
-  }
-}
+const MainDisplay = props => {
+  const { item: { name, properties } } = props;
+  return (
+    <div className="panel">
+      <h4 className="panel-heading title is-3 title-case">{name}</h4>
+      {properties.map((prop, uid) => <MainDisplayItem key={uid} item={prop} />)}
+    </div>
+  );
+};
 export default MainDisplay;

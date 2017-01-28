@@ -11,14 +11,15 @@ class App extends Component {
       .then(json => this.initData(json))
       .then(
         data => this.setState({ data, loading: false, itemForMain: data[0] })
-      ).catch(err => console.error(err));
+      )
+      .catch(err => console.error(err));
   }
   initData(data) {
     const initialValue = [
       { name: "General Info", areSubItemsVisible: true, properties: [] }
     ];
     const groups = data.reduce(
-      (accum, group,) => {
+      (accum, group) => {
         if (group.hasOwnProperty("containing_object")) {
           // create reference to normalize up data
           group.properties = group.containing_object.properties;
@@ -51,7 +52,7 @@ class App extends Component {
       // prevent unwanted scrolling
       datum.properties.forEach(prop => {
         prop.isActive = false;
-      })
+      });
       if (datum.name === item.name) {
         datum.areSubItemsVisible = !datum.areSubItemsVisible;
       } else {
@@ -63,7 +64,7 @@ class App extends Component {
     this.setState({ data: newData, itemForMain: item });
   };
   setActiveItem = item => {
-    const {properties } = this.state.itemForMain;
+    const { properties } = this.state.itemForMain;
     const newProps = properties.map(obj => {
       if (obj.id === item.id) obj.isActive = true;
       else obj.isActive = false;
@@ -73,7 +74,7 @@ class App extends Component {
       itemForMain: Object.assign(
         { properties: newProps },
         this.state.itemForMain
-      ),
+      )
     });
   };
 

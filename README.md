@@ -4,3 +4,11 @@
 * Clone the repo
 * Install dependencies with `npm install` or `yarn install`
 * Run with `npm run start` or `yarnpkg start`
+
+
+
+## notes
+* prop types
+* scroll thing?
+* nested loops - O(n2)
+
