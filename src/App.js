@@ -3,13 +3,12 @@ import "../node_modules/bulma/css/bulma.css";
 import "./App.css";
 import SidePanel from "./components/SidePanel";
 import MainDisplay from "./components/MainDisplay";
-import {dataNormalizer} from "./alternativeInitData";
 class App extends Component {
   state = { data: [], itemForMain: undefined, loading: true };
   componentDidMount() {
     fetch(`/data/schema.json`)
       .then(res => res.json())
-      .then(json => dataNormalizer(json))
+      .then(json => this.initData(json))
       .then(
         data => this.setState({ data, loading: false, itemForMain: data[0] })
       )
