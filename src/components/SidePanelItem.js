@@ -20,9 +20,9 @@ const SidePanelItem = (props) =>  {
     const { item:{name,  properties , areSubItemsVisible}, item } = props;
     return (
       <div className="panel-block aside-panels">
-        <a className={"group-header " + (areSubItemsVisible ? "active": undefined)} 
+        <a className={"group-header " + (areSubItemsVisible ? "active-header": undefined)} 
         onClick={() => props.handleItemClick(item)}>
-              <span className="plus">{areSubItemsVisible ? "-" : "+"}</span>
+            
               {removeUnderscores(name)}
             </a> 
         {areSubItemsVisible ? renderProperties(properties, props.setActiveItem) : undefined}

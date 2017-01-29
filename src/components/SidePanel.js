@@ -5,8 +5,8 @@ import SidePanelItem from "./SidePanelItem";
 const SidePanel = props => {
   const {data} = props;
   return (
-    <aside>
-      <nav className="panel">
+    <aside className="flex-column align-center side-nav-container">
+      <nav className="panel side-nav">
         <p className="panel-heading fields-header">
           Field Groups
         </p>

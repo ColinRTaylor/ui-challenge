@@ -14,9 +14,6 @@
 .control {
     text-transform: capitalize;
 }
-.plus {
-    color: grey;
-}
 .side-panel-item {
     border-left: 3px solid #858383;
     color: #858383;
@@ -34,29 +31,33 @@
     margin-bottom: 3%;
     text-transform: capitalize;
 }
+.active-header {
+    color: #414040;
+}
 .group-header:hover {
     cursor: pointer;
 }
 .group-header.active {
     color: #414040;
 }
-.usage-icon {
-    fill: #fff;
+.side-nav-container {
+    position: fixed;
+    width: 25%;
+    align-items: center;
+    height: 100%;
+    background: #e4e2e2;
 }
-.icon {
-    border-radius: 50%;
-    height: 2vh;
-    width: 2vw;
-    height: 32px;
-    width: 32px;
-    margin-right: 1vw;
+@media(max-width: 768px) {
+    aside {
+        position: relative;
+        width: auto;
+    }
 }
-.community {
-     background: #10a410;
-}
-.giving_tree {
-    background: #d9a649;
-}
-.console {
-    background: #689df3;
+.side-nav {
+    width: 75%;
+    position: relative;
+    background: #fff;
+    overflow-y: auto;
+    overflow-x: hidden;
+    margin-bottom: 15vh;
 }

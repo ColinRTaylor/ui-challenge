@@ -19,7 +19,8 @@
   display: flex;
   flex-direction: column;
   align-items: baseline;
-  padding: 10% 2%;
+  padding: 2%;
+  border-bottom-color: blackk;
 }
 .title-case {
   text-transform: capitalize;
@@ -32,4 +33,11 @@
     width: 100%;
     margin-top: 10%;
     font-size: 2em;
+}
+
+.nav-left, .app-content {
+  background: whitesmoke;
+}
+.padding-top {
+  padding-top: 5%;
 }

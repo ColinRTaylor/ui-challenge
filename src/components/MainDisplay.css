@@ -5,9 +5,6 @@
     margin-bottom: 0;
 
 }
-/*.columns.display-section {
-    margin-bottom: 0;
-}*/
 .display-section {
     border: 0.1em solid #9d9898;
 }
@@ -24,4 +21,24 @@
 .field-name {
     color: rebeccapurple;
     font-weight: bold;
+}
+.usage-icon {
+    fill: #fff;
+}
+.icon {
+    border-radius: 50%;
+    height: 2vh;
+    width: 2vw;
+    height: 32px;
+    width: 32px;
+    margin-right: 1vw;
+}
+.community {
+     background: #10a410;
+}
+.giving_tree {
+    background: #d9a649;
+}
+.console {
+    background: #689df3;
 }
