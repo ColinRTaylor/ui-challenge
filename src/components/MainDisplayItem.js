@@ -5,13 +5,9 @@ import "./MainDisplay.css";
 class MainDisplayItem extends Component {
   componentWillReceiveProps() {
     if (this.props.item.isActive) {
-      // this.scrollTo();
       scrollToSlow(document.body, this.node.offsetTop - 10, 400);
     }
   }
-  scrollTo = () => {
-    this.node.scrollIntoView({ behavior: "smooth", block: "end" });
-  };
   render() {
     const { item: { name, data_type, app_keys, isActive } } = this.props;
     return (

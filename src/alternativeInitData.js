@@ -1,6 +1,6 @@
 // unused but alternative methods to format inital data with
 export function dataNormalizer(data) {
-    // formats top level objects to have same properties
+    // formats top level objects to have same properties, disgarding unused properties 
     const schema = { name: "", areSubItemsVisible: false, properties: [] }
     const initialObj = Object.assign({}, schema, {
       name : "General Info",
