@@ -13,7 +13,7 @@ const SidePanel = props => {
         {data.map((datum, index) => {
           return (
             <SidePanelItem
-              handleItemClick={props.handleItemClick}
+              handleSideItemClick={props.handleSideItemClick}
               setActiveItem={props.setActiveItem}
               key={index}
               item={datum}

@@ -21,7 +21,7 @@ const SidePanelItem = (props) =>  {
     return (
       <div className="panel-block aside-panels">
         <a className={"group-header " + (areSubItemsVisible ? "active-header": undefined)} 
-        onClick={() => props.handleItemClick(item)}>
+        onClick={() => props.handleSideItemClick(item)}>
             
               {removeUnderscores(name)}
             </a> 

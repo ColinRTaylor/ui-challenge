@@ -34,7 +34,7 @@ class App extends Component {
     );
     return groups;
   }
-  handleItemClick = item => {
+  handleSideItemClick = item => {
     // doing at data level so can only have 1 open at a time
     const { data } = this.state;
     const newData = data.map(datum => {
@@ -82,7 +82,7 @@ class App extends Component {
                 <SidePanel
                   setActiveItem={this.setActiveItem}
                   data={data}
-                  handleItemClick={this.handleItemClick}
+                  handleSideItemClick={this.handleSideItemClick}
                 />
               </div>
           }
